@@ -67,6 +67,19 @@ public class BbsDAO {
 		
 		return list;
 	}
+	
+	//조회수 반영하기-------------
+	public static BbsVO editHit(int bbsIdx, int hit) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("bbsIdx", bbsIdx);
+		map.put("hit", hit);
+		
+		SqlSession ss = DBService.getFactory().openSession(true);
+		BbsVO vo = ss.selectOne("BBS.editHit", map);
+		ss.close();
+		
+		return vo;
+	}
 }
 
 

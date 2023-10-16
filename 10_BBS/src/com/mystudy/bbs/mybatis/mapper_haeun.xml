@@ -55,6 +55,14 @@
 		WHERE BBS_IDX = #{bbsIdx}
 		ORDER BY COMMENT_IDX DESC
 	</select>
+	
+	<!-- 조회수 반영하기 ============== -->
+	<select id="editHit" resultType="bbsVO" parameterType="map">
+        UPDATE BBS
+		SET HIT = #{hit}
+		WHERE BBS_IDX = #{bbsIdx}
+	</select>
+	
 </mapper>
 
 

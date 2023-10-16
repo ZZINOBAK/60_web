@@ -1,7 +1,7 @@
 package com.mystudy.bbs.vo;
 
 public class CommentVO {
-	private String commentIdx, writer, content, pwd, writeIate,
+	private String commentIdx, writer, content, pwd, writeDate,
 			ip, bbsIdx;
 
 	public String getCommentIdx() {
@@ -36,12 +36,12 @@ public class CommentVO {
 		this.pwd = pwd;
 	}
 
-	public String getWriteIate() {
-		return writeIate;
+	public String getWriteDate() {
+		return writeDate;
 	}
 
-	public void setWriteIate(String writeIate) {
-		this.writeIate = writeIate;
+	public void setWriteDate(String writeDate) {
+		this.writeDate = writeDate;
 	}
 
 	public String getIp() {
@@ -63,7 +63,7 @@ public class CommentVO {
 	@Override
 	public String toString() {
 		return "CommentVO [commentIdx=" + commentIdx + ", writer=" + writer + ", content=" + content + ", pwd=" + pwd
-				+ ", writeIate=" + writeIate + ", ip=" + ip + ", bbsIdx=" + bbsIdx + "]";
+				+ ", writeDate=" + writeDate + ", ip=" + ip + ", bbsIdx=" + bbsIdx + "]";
 	}
 	
 	
