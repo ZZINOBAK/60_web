@@ -11,7 +11,7 @@
 	<form action="controller" method="post">
 		성명 : <input type="text" name="name">
 		<input type="submit" value="이름으로 검색">
-		<input type="hidden" name="type" value="fullnameList">
+		<input type="hidden" name="type" value="fullname">
 	</form>
 </body>
 </html>

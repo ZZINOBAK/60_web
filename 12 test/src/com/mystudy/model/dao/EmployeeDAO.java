@@ -1,6 +1,8 @@
 package com.mystudy.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -29,6 +31,17 @@ public class EmployeeDAO {
 	public static List<EmployeeVO> getFullnameList(String name) {
 		SqlSession ss = DBService.getFactory().openSession();
 		List<EmployeeVO> list = ss.selectList("hr.fullnameList", name);
+		ss.close();
+		return list;
+	}
+
+	public static List<EmployeeVO> getSearch(String idx, String keyword) {
+		Map<String, String> map = new HashMap<>();
+		map.put("idx", idx);
+		map.put("keyword", keyword);
+		
+		SqlSession ss = DBService.getFactory().openSession();
+		List<EmployeeVO> list = ss.selectList("hr.search", map);
 		ss.close();
 		return list;
 	}	

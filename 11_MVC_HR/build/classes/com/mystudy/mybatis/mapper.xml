@@ -15,21 +15,7 @@
 		WHERE DEPARTMENT_ID = #{deptno}
 		ORDER BY EMPLOYEE_ID
 	</select>
-	
-	<!-- 성명으로 검색(조회) -->
-	<select id="fullnameList" parameterType="string" resultType="employeeVO">
-		SELECT *
-		FROM EMPLOYEES
-		WHERE FIRST_NAME = INITCAP(#{name})
-		   OR LAST_NAME = INITCAP(#{name})
-		ORDER BY EMPLOYEE_ID	
-	</select>
-	
 </mapper>
-
-
-
-
 
 
 

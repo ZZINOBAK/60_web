@@ -17,8 +17,9 @@ public class FullnameListCommand implements Command {
 		// fullname 요청 처리(입력폼/직원목록)
 		//0. 파라미터 값 확인(추출)
 		String name = request.getParameter("name");
+		System.out.println("FullnameListCommand name : " + name);
 		
-		EmployeeVO list = EmployeeDAO.getFullNameList(name);
+		List<EmployeeVO> list = EmployeeDAO.getFullNameList(name);
 		
 		request.setAttribute("list", list);
 		

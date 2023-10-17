@@ -16,20 +16,26 @@
 		ORDER BY EMPLOYEE_ID
 	</select>
 	
-	<!-- 성명으로 검색(조회) -->
-	<select id="fullnameList" parameterType="string" resultType="employeeVO">
-		SELECT *
-		FROM EMPLOYEES
+	<!-- 부서 직원 검색 -->
+	<select id="dept" parameterType="string" resultType="employeeVO">
+		SELECT * FROM EMPLOYEES
+		WHERE DEPARTMENT_ID = #{deptno}
+	</select>
+	
+	<!-- 부서 직원 이름 목록 검색 -->
+	<select id=" fullnameList" parameterType="string" resultType="employeeVO">
+		SELECT * FROM EMPLOYEES
 		WHERE FIRST_NAME = INITCAP(#{name})
-		   OR LAST_NAME = INITCAP(#{name})
-		ORDER BY EMPLOYEE_ID	
+		OR LAST_NAME = INITCAP(#{name})
+	</select>
+	
+	<select id="fullname" parameterType="string" resultType="employeeVO">
+		SELECT * FROM EMPLOYEES
+		WHERE FIRST_NAME = INITCAP(#{name})
+		OR LAST_NAME = INITCAP(#{name})
 	</select>
 	
 </mapper>
-
-
-
-
 
 
 

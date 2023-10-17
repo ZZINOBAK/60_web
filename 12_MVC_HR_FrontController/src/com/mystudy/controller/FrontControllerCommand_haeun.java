@@ -12,6 +12,7 @@ import com.mystudy.model.command.Command;
 import com.mystudy.model.command.DeptCommand;
 import com.mystudy.model.command.DeptListCommand;
 import com.mystudy.model.command.FullnameCommand;
+import com.mystudy.model.command.FullnameListCommand;
 import com.mystudy.model.command.ListCommand;
 
 @WebServlet("/controller")
@@ -22,7 +23,9 @@ public class FrontControllerCommand extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(">> FrontControllerCommand doGet() 실행----");
 		String type = request.getParameter("type");
+		String name = request.getParameter("name");
 		System.out.println("> type : " + type);
+		System.out.println("> name : " + name);
 		
 		Command command = null;
 		if ("list".equals(type)) {
@@ -36,6 +39,9 @@ public class FrontControllerCommand extends HttpServlet {
 		}
 		if ("fullname".equals(type)) {
 			command = new FullnameCommand();
+		}
+		if ("fullnameList".equals(type)) {
+			command = new FullnameListCommand();
 		}
 		String path = command.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);

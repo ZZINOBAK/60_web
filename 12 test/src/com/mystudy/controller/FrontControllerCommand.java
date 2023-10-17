@@ -13,6 +13,7 @@ import com.mystudy.model.command.DeptCommand;
 import com.mystudy.model.command.DeptListCommand;
 import com.mystudy.model.command.FullnameCommand;
 import com.mystudy.model.command.ListCommand;
+import com.mystudy.model.command.SearchCommand;
 
 @WebServlet("/controller")
 public class FrontControllerCommand extends HttpServlet {
@@ -36,6 +37,9 @@ public class FrontControllerCommand extends HttpServlet {
 		}
 		if ("fullname".equals(type)) {
 			command = new FullnameCommand();
+		}
+		if ("search".equals(type)) {
+			command = new SearchCommand();
 		}
 		String path = command.exec(request, response);
 		request.getRequestDispatcher(path).forward(request, response);

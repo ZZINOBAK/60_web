@@ -10,24 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 import com.mystudy.model.dao.EmployeeDAO;
 import com.mystudy.model.vo.EmployeeVO;
 
-public class FullnameCommand implements Command {
+public class ListCommand implements Command {
 
 	@Override
 	public String exec(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// fullname 요청 처리(입력폼/직원목록)
-		//0. 파라미터 값 확인(추출)
-		String name = request.getParameter("name");
-		System.out.println(">> FullnameCommand name : " + name);
+		//1. DB연결하고 데이터 가져오기
+		List<EmployeeVO> list = EmployeeDAO.getList();
 		
-		if (name == null) {
-			return "fullname.jsp";
-		} 
-		
-		//전달받은 이름으로 DB데이터 조회 후 목록페이지로 이동
-		List<EmployeeVO> list = EmployeeDAO.getFullnameList(name);
+		//2. 응답페이지(list.jsp)에 전달
 		request.setAttribute("list", list);
 		
-		return "fullnameList.jsp";
+		//3. 페이지 전환 - 응답할 페이지(list.jsp)로 포워딩(위임,전가)
+		//request.getRequestDispatcher("list.jsp").forward(request, response);
+		
+		return "list.jsp";
 	}
 
 }
