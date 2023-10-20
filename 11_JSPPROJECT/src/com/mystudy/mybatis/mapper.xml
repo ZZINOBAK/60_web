@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="haeun">
+
+	<!-- 장바구니보기(selectall) -->
+	<select id="clist" resultType="cartVO">
+	SELECT * FROM CART ORDER BY C_NUM
+	</select>
+	
+	<select id="cSelect" resultType="cartVO">
+	SELECT * FROM CART WHERE PRODUCT_NUM = #{productNum}
+	</select>
+	
+	<!-- 장바구니담기(insert) fk(productNum, id)-->
+	<insert id="cInsert" parameterType="CartVO">
+	INSERT INTO CART 
+	(C_NUM, PRODUCT_NUM, ID, PRODUCT_NAME, C_COUNT, PRICE, SALEPRICE, IMAGE)
+	VALUES 
+	(cart_seq_test.nextval, #{productNum}, #{id}, #{productName}, 
+	#{cCount}, #{price}, #{saleprice}, #{image})
+	</insert>
+	
+	<!-- 장바구니수량수정(update) -->
+	<update id="cUpdate" parameterType="int">
+	UPDATE CART 
+	SET C_COUNT = #{cCount}
+	WHERE C_NUM = #{cNum}
+	</update>
+		
+	<!-- 장바구니삭제(delete) -->
+	<delete id="cDelete" parameterType="int">
+	DELETE
+	FROM CART
+	WHERE PRODUCT_NUM = #{productNum}
+	</delete>
+	
+	<!-- 구매내역 보기(selectall) -->
+	<select id="olist" resultType="orderlistVO">
+		SELECT * FROM ORDER_LIST ORDER BY O_NUM
+	</select>
+	
+	<!-- 구매내역 추가하기(insert) fk(productNum, id)-->
+	<insert id="oInsert1" parameterType="OrderListVO">
+	INSERT INTO ORDER_LIST
+	(O_NUM, PRODUCT_NUM, ID, C_COUNT, O_DATE, PAYMENT, PRODUCT_NAME, PRICE, SALEPRICE)
+	VALUES 
+	(order_list_seq_test.nextval, #{productNum}, #{id}, #{cCount}, sysdate, 'test', #{productName}, #{price}, #{saleprice})
+	</insert>
+	
+	<!-- 구매내역 추가하기(insert) fk(productNum, id) 장바구니에서 추가하기-->
+	<insert id="oInsert2" parameterType="OrderListVO">
+	INSERT INTO ORDER_LIST
+		(O_NUM, PRODUCT_NUM, ID, C_COUNT, O_DATE, PAYMENT, 
+		PRODUCT_NAME, PRICE, SALEPRICE)
+	SELECT 
+		order_list_seq_test.nextval,
+	    #{productNum},
+	    c.ID,
+	    c.C_COUNT,
+	    sysdate,
+	    'test',
+	    p.PRODUCT_NAME,
+	    p.PRICE,
+	    p.SALEPRICE
+	FROM cart c
+		JOIN products p ON c.PRODUCT_NUM = p.PRODUCT_NUM
+	WHERE c.PRODUCT_NUM = #{productNum}
+	</insert>
+	
+	<!-- 구매 취소하기(delete) -->
+	<delete id="oDelete" parameterType="int">
+	DELETE
+	FROM ORDER_LIST
+	WHERE O_NUM = #{oNum}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
